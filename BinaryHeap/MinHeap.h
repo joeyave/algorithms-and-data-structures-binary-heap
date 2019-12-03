@@ -10,7 +10,7 @@ public:
 		heap_arr = new int[cps];
 	}
 
-	// A recursive method to heapify a subtree with the root at given index. 
+	// A recursive method to max_heapify a subtree with the root at given index. 
 	// This method assumes that the subtrees are already heapified. 
 	void min_heapify(int i);
 	void insert(int key);

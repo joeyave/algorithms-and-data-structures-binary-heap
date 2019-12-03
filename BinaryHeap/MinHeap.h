@@ -12,7 +12,7 @@ public:
 
 	// A recursive method to heapify a subtree with the root at given index. 
 	// This method assumes that the subtrees are already heapified. 
-	void min_heapify(int i);
+	void min_heapify(int i, int heap_size);
 	void insert(int key);
 
 	// Decreases value of key at index 'i' to new_val.
@@ -29,6 +29,7 @@ public:
 	int get_right(int i) { return 2 * i + 2; }
 	int get_root() { return heap_arr[0]; }
 	void print();
+	void sort();
 
 private:
 	int* heap_arr; // Pointer to array of elements in heap.

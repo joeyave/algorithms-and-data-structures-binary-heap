@@ -1,13 +1,13 @@
 #include "MinHeap.h"
 #include <iostream>
 
-void MinHeap::min_heapify(int i)
+void MinHeap::min_heapify(int i, int heap_size)
 {
 	int l = get_left(i);
 	int r = get_right(i);
 	int smallest = i;
 	
-	if (l < heap_size && heap_arr[l] < heap_arr[i])
+	if (l < heap_size && heap_arr[l] < heap_arr[smallest])
 		smallest = l;
 	
 	if (r < heap_size && heap_arr[r] < heap_arr[smallest])
@@ -16,7 +16,7 @@ void MinHeap::min_heapify(int i)
 	if (smallest != i)
 	{
 		std::swap(heap_arr[i], heap_arr[smallest]);
-		min_heapify(smallest);
+		min_heapify(smallest, heap_size);
 	}
 }
 
@@ -64,7 +64,7 @@ int MinHeap::extract_root()
 	const int root = heap_arr[0];
 	heap_arr[0] = heap_arr[heap_size - 1];
 	heap_size--;
-	min_heapify(0);
+	min_heapify(0, heap_size);
 
 	return root;
 }
@@ -79,16 +79,21 @@ void MinHeap::remove(int i)
 
 void MinHeap::print()
 {
-	int i = 0;
-	int k = 1;
-	while (i < heap_size) 
+	for (int i = 0; i < heap_size; ++i)
+		std::cout << heap_arr[i] << " ";
+	std::cout << std::endl;
+}
+
+// main function to do heap sort 
+void MinHeap::sort()
+{
+	// One by one extract an element from heap 
+	for (int i = heap_size - 1; i >= 0; i--) 
 	{
-		while (i < k && i < heap_size) 
-		{
-			std::cout << heap_arr[i] << " ";
-			i++;
-		}
-		std::cout << std::endl;
-		k = k * 2 + 1;
+		// Move current root to end 
+		std::swap(heap_arr[0], heap_arr[i]);
+
+		// call max heapify on the reduced heap 
+		min_heapify(0, i);
 	}
 }
